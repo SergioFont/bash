@@ -18,5 +18,17 @@ gnome-terminal --tab --title="wlan0" --command="bash -c 'ip link; pidof bash; $S
 
 gnome-terminal --tab --title="tab 1" --command="bash -c 'cd /etc; ls; $SHELL'" --tab --title="tab 2" --command="bash -c 'cd ~; ls; $SHELL'" --tab --title="tab 3" --command="bash -c 'cd ~/temp3; ls; $SHELL'"
 
+#!/bin/bash
+
+# array-sort : Sort an array
+
+sort_prompt=$(pidof bash)
+echo $sort_prompt
+a=(3 7 1 4 2)
+
+echo "Original array: ${sort_prompt[@]}"
+prompt_sorted=($(for i in "${sort_prompt[@]}"; do echo $i; done | sort))
+echo "Sorted array:   ${prompt_sorted[@]}"
+
 
 sudo apt-get install hostapd
