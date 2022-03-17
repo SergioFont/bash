@@ -14,6 +14,10 @@ sudo ip netns exec $wifiname bash
 # Execute in other prompt
 sudo iw phy phy0 set netns 2173
 
+gnome-terminal --tab --title="wlan0" --e="bash -c 'ip link; pid=($BASHPID); sort=($(for i in "${pid[@]}" ; do echo $i; done)); echo "${sort[@]}"; $SHELL'"
+pid=($BASHPID)
+for i in "${pid[@]}" ; do echo $i; done
+
 gnome-terminal --tab --title="wlan0" --command="bash -c 'ip link; pidof bash; $SHELL'" --tab --title="wlan1" --command="bash -c 'ip link; pidof bash; $SHELL'"
 
 gnome-terminal --tab --title="tab 1" --command="bash -c 'cd /etc; ls; $SHELL'" --tab --title="tab 2" --command="bash -c 'cd ~; ls; $SHELL'" --tab --title="tab 3" --command="bash -c 'cd ~/temp3; ls; $SHELL'"
