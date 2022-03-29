@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Creating  wlan interfaces and wireless network (as access point) for Linux to prove the pwnwifi
 # Fill the variable with your value
 
@@ -10,11 +12,22 @@ sudo ip netns list
 
 sudo ip netns exec $wifiname bash
 
+# Create and export PID window prompt in variable
+num="$BASHPID"
+export num
 
 # Execute in other prompt
 sudo iw phy phy0 set netns 2173
 
-gnome-terminal --tab --title="wlan0" --e="bash -c 'ip link; pid=($BASHPID); sort=($(for i in "${pid[@]}" ; do echo $i; done)); echo "${sort[@]}"; $SHELL'"
+
+sudo apt-get install hostapd
+
+unset $num
+
+
+    #Trying
+
+gnome-terminal --tab --title="wlan0" --command="bash -c 'ip link; pid="$BASHPID"; echo $pid; $SHELL'"
 pid=($BASHPID)
 for i in "${pid[@]}" ; do echo $i; done
 
@@ -22,7 +35,7 @@ gnome-terminal --tab --title="wlan0" --command="bash -c 'ip link; pidof bash; $S
 
 gnome-terminal --tab --title="tab 1" --command="bash -c 'cd /etc; ls; $SHELL'" --tab --title="tab 2" --command="bash -c 'cd ~; ls; $SHELL'" --tab --title="tab 3" --command="bash -c 'cd ~/temp3; ls; $SHELL'"
 
-#!/bin/bash
+
 
 # array-sort : Sort an array
 
@@ -34,5 +47,3 @@ echo "Original array: ${sort_prompt[@]}"
 prompt_sorted=($(for i in "${sort_prompt[@]}"; do echo $i; done | sort))
 echo "Sorted array:   ${prompt_sorted[@]}"
 
-
-sudo apt-get install hostapd
